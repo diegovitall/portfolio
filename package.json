@@ -1,0 +1,24 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Desenvolvedor Full Stack Freelancer",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegovitall/portfolio.git"
+  },
+  "author": "DIEGO RODRIGO BARBOSA VITAL",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/diegovitall/portfolio/issues"
+  },
+  "homepage": "https://github.com/diegovitall/portfolio#readme",
+  "dependencies": {
+    "next": "^13.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
