@@ -1,3 +1,4 @@
+import { Menu } from './components/Menu';
 import { Terminal } from './components/Terminal';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
 import { ProjectsSection } from './components/ProjectsSection';
@@ -15,16 +16,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      <nav id="header" className="mt-4 mb-8">
-        <div className="container mx-auto px-4 py-4 pt-8 flex justify-end items-center">
-          <ul className="flex nav-list">
-            <li><a href="#header" className="text-white hover:text-green-400 transition-colors">Home</a></li>
-            <li><a href="#projects" className="text-white hover:text-green-400 transition-colors">Projetos</a></li>
-            <li><a href="#technologies" className="text-white hover:text-green-400 transition-colors">Tecnologia</a></li>
-            <li><a href="#contact" className="text-white hover:text-green-400 transition-colors">Contato</a></li>
-          </ul>
-        </div>
-      </nav>
+      <Menu />
       <div id="home" className="container mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">

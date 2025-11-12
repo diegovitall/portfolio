@@ -1669,3 +1669,11 @@ html {
 .nav-list li + li {
   margin-left: 2rem; /* Adjust as needed */
 }
+
+.mobile-menu {
+  display: none;
+}
+
+.mobile-menu.open {
+  display: block;
+}
