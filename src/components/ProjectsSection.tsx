@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import { ProjectScreen } from './ProjectScreen';
 import portfolioProjectImage from '../assets/portfolio-project.png';
 import card2Image from '../assets/card2-img.png';
+import card3Image from '../assets/card3-img.png';
+
 
 interface Project {
   id: number;
@@ -37,7 +39,7 @@ export function ProjectsSection() {
       id: 3, // Next available ID
       title: 'Novos Projetos em Breve',
       description: 'Estamos trabalhando em novos projetos inovadores. Fique ligado!',
-      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
+      image: card3Image,
       tags: ['Em Desenvolvimento', 'Inovação', 'Tecnologia'],
       category: 'Coming Soon',
       link: '#',
