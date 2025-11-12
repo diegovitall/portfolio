@@ -29,7 +29,7 @@ export function ProjectScreen({ project }: ProjectScreenProps) {
         </div>
 
         <div className="bg-white rounded-b-2xl overflow-hidden">
-          <div className="relative h-96 overflow-hidden">
+          <div className="relative h-96 sm:h-96 sm:aspect-auto overflow-hidden">
             <ImageWithFallback
               src={project.image}
               alt={project.title}
@@ -44,8 +44,8 @@ export function ProjectScreen({ project }: ProjectScreenProps) {
               <p className="text-gray-600">{project.description}</p>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex flex-wrap gap-2">
+            <div className="flex flex-col gap-y-4">
+              <div className="flex flex-wrap gap-2 mb-8">
                 {project.tags.map((tag, index) => (
                   <span
                     key={index}

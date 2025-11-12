@@ -45,7 +45,7 @@ export default function App() {
           </div>
 
           <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden  mx-auto bg-transparent" style={{ width: '700px' }}>
+            <div className="relative rounded-2xl overflow-hidden max-w-lg mx-auto bg-transparent">
               <ImageWithFallback
                 src={person1Image}
                 alt="Desenvolvedor"
