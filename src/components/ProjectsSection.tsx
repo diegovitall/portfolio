@@ -3,6 +3,7 @@ import { ProjectScreen } from './ProjectScreen';
 import portfolioProjectImage from '../assets/portfolio-project.png';
 import card2Image from '../assets/card2-img.png';
 import card3Image from '../assets/card3-img.png';
+import { useIsMobile } from './ui/use-mobile';
 
 
 interface Project {
@@ -54,11 +55,14 @@ export function ProjectsSection() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [cardTranslateX, setCardTranslateX] = useState(77); // Default, will be calculated
 
+  const isMobile = useIsMobile();
+
   const calculateTranslateX = () => {
     if (carouselRef.current) {
       const containerWidth = carouselRef.current.offsetWidth;
-      const cardWidth = containerWidth * 0.75; // 75% of container width
-      const gapWidth = 24; // Tailwind gap-6 is 1.5rem = 24px
+      // If mobile, card takes full width, no gap
+      const cardWidth = isMobile ? containerWidth : containerWidth * 0.75;
+      const gapWidth = isMobile ? 0 : 24; // Tailwind gap-6 is 1.5rem = 24px
 
       const calculatedTranslateX = ((cardWidth + gapWidth) / containerWidth) * 100;
       setCardTranslateX(calculatedTranslateX);
@@ -69,7 +73,7 @@ export function ProjectsSection() {
     calculateTranslateX(); // Calculate on mount
     window.addEventListener('resize', calculateTranslateX); // Recalculate on resize
     return () => window.removeEventListener('resize', calculateTranslateX);
-  }, [projects.length]); // Recalculate if projects change
+  }, [projects.length, isMobile]); // Recalculate if projects or mobile state change
 
   // Auto-play logic
   const startAutoPlay = () => {
@@ -148,24 +152,24 @@ export function ProjectsSection() {
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseLeave}
         >
-          <div 
-            className="flex gap-6 transition-transform duration-300 ease-out"
-            style={{ 
-              transform: `translateX(-${currentIndex * cardTranslateX}%)`,
-            }}
-          >
-            {projects.map((project, index) => (
-              <div 
-                key={project.id} 
-                className={`flex-shrink-0 transition-all duration-300 ${
-                  index === currentIndex 
-                    ? 'w-[75%]' 
-                    : 'w-[75%] opacity-60 scale-95'
-                }`}
-              >
-                <ProjectScreen project={project} />
-              </div>
-            ))}
+                    <div
+                      className={`flex transition-transform duration-300 ease-out ${isMobile ? 'gap-0' : 'gap-6'}`}
+                      style={{
+                        transform: `translateX(-${currentIndex * cardTranslateX}%)`,
+                      }}
+                    >            {projects.map((project, index) => (
+                            <div
+                              key={project.id}
+                              className={`flex-shrink-0 transition-all duration-300 ${
+                                isMobile
+                                  ? 'w-full' // Full width for mobile
+                                  : index === currentIndex
+                                    ? 'w-[75%]'
+                                    : 'w-[75%] opacity-60 scale-95'
+                              }`}
+                            >
+                              <ProjectScreen project={project} />
+                            </div>            ))}
           </div>
         </div>
 
