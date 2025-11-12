@@ -137,7 +137,7 @@ export function TechnologiesSection() {
                         isActive && "border-green-500 shadow-lg shadow-green-500/20"
                       )}>
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-4">
+                          <div className="flex flex-wrap items-center gap-4">
                             <h3 
                               className="text-2xl"
                               style={{ color: tech.color }}
