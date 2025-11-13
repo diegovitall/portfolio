@@ -92,6 +92,7 @@ function Carousel({
   React.useEffect(() => {
     if (!api || !setApi) return;
     setApi(api);
+    console.log("Embla Carousel API initialized:", api); // Add this line
   }, [api, setApi]);
 
   React.useEffect(() => {
@@ -145,11 +146,12 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
       <div
         className={cn(
           "flex",
-          orientation === "horizontal"
-            ? "-ml-4 touch-action-pan-y"
-            : "-mt-4 flex-col touch-action-pan-x",
+          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
           className,
         )}
+        style={{
+          touchAction: orientation === "horizontal" ? "pan-y" : "pan-x",
+        }}
         {...props}
       />
     </div>

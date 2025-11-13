@@ -206,11 +206,3 @@ html {
 .nav-list li + li {
   margin-left: 2rem; /* Adjust as needed */
 }
-
-.touch-action-pan-y {
-  touch-action: pan-y;
-}
-
-.touch-action-pan-x {
-  touch-action: pan-x;
-}
