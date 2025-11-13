@@ -21,8 +21,8 @@ export function Footer() {
                   <Mail className="w-4 h-4 text-green-400 mt-0.5" />
                   <div>
                     <span className="text-gray-400">email:</span>
-                    <a href="mailto:dev@example.com" className="text-green-400 hover:text-green-300 transition-colors ml-2">
-                      diego-dev@proton.me
+                    <a href="mailto:diego-rbv.dev@proton.me" className="text-green-400 hover:text-green-300 transition-colors ml-2">
+                      diego-rbv.dev@proton.me
                     </a>
                   </div>
                 </div>
