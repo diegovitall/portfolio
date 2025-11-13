@@ -137,6 +137,25 @@ function Carousel({
 function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
   const { carouselRef, orientation } = useCarousel();
 
+  // Add a non-passive touchmove event listener to prevent default browser scrolling
+  React.useEffect(() => {
+    const carouselElement = carouselRef.current;
+    if (!carouselElement) return;
+
+    const handleTouchMove = (event: TouchEvent) => {
+      // Prevent default only if Embla is actively dragging.
+      // For simplicity, we'll prevent default always for now to test if this is the issue.
+      // A more sophisticated solution would check Embla's internal state.
+      event.preventDefault();
+    };
+
+    carouselElement.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+    return () => {
+      carouselElement.removeEventListener("touchmove", handleTouchMove, { passive: false });
+    };
+  }, [carouselRef]);
+
   return (
     <div
       ref={carouselRef}
