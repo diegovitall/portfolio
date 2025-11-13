@@ -3,6 +3,7 @@ import { ProjectScreen } from './ProjectScreen';
 import portfolioProjectImage from '../assets/portfolio-project.png';
 import card2Image from '../assets/card2-img.png';
 import card3Image from '../assets/card3-img.png';
+import card4Image from '../assets/card4-img.png';
 import { useIsMobile } from './ui/use-mobile';
 
 
@@ -29,6 +30,15 @@ export function ProjectsSection() {
     },
     {
       id: 2,
+      title: 'Bolão Copa do Mundo FIFA 2026',
+      description: 'Bolão online para a Copa do Mundo FIFA de 2026.',
+      image: card4Image,
+      tags: ['TypeScript', 'React', 'PostgreSQL', 'Next'],
+      category: 'Web Application',
+      link: '#',
+    },
+    {
+      id: 3,
       title: 'Vision',
       description: 'Plataforma online para Empresas e Profissionais Autônomos.',
       image: card2Image,
@@ -37,7 +47,7 @@ export function ProjectsSection() {
       link: '#',
     },
     {
-      id: 3, // Next available ID
+      id: 4, // Next available ID
       title: 'Novos Projetos em Breve',
       description: 'Estamos trabalhando em novos projetos inovadores. Fique ligado!',
       image: card3Image,
