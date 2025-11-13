@@ -39,7 +39,7 @@ export function ProjectsSection() {
     },
     {
       id: 3,
-      title: 'Bolão Copa do Mundo FIFA de 2026',
+      title: 'Bolão Copa do Mundo FIFA',
       description: 'Bolão online para a Copa do Mundo FIFA de 2026.',
       image: card4Image,
       tags: ['TypeScript', 'React', 'PostgreSQL', 'Next'],
