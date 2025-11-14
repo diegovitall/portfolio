@@ -32,7 +32,7 @@ export function Footer() {
                   <Phone className="w-4 h-4 text-green-400 mt-0.5" />
                   <div>
                     <span className="text-gray-400">Telefone:</span>
-                    <a href="tel:+5511999999999" className="text-green-400 hover:text-green-300 transition-colors ml-2">
+                    <a href="tel:+5582988494456" className="text-green-400 hover:text-green-300 transition-colors ml-2">
                       +55 82 98849-4456
                     </a>
                   </div>
