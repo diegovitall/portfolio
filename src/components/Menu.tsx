@@ -24,11 +24,22 @@ export function Menu() {
         )}
 
         {/* Hamburger Button - visible on mobile, hidden on desktop */}
-        {!isDesktop && (
-          <button onClick={toggleMenu} className="text-white focus:outline-none">
-            <MenuIcon className="w-6 h-6" />
-          </button>
+        {!isDesktop && !isMenuOpen && (
+          <div className="container mx-auto flex justify-start">
+            <button onClick={toggleMenu} className="text-white focus:outline-none">
+              <MenuIcon className="w-6 h-6" />
+            </button>
+          </div>
         )}
+
+        {!isDesktop && isMenuOpen && (
+          <div className="container mx-auto flex justify-start">
+            <button onClick={toggleMenu} className="text-white focus:outline-none">
+              <XIcon className="w-6 h-6" />
+            </button>
+          </div>
+        )}
+
       </div>
 
       {/* Mobile Menu Modal - only appears when isMenuOpen is true AND it's a mobile screen */}
@@ -36,11 +47,6 @@ export function Menu() {
         <div>
           <div className="fixed inset-0 bg-gray-900 bg-opacity-75 z-50" onClick={toggleMenu}></div> {/* Overlay */}
           <div className="fixed inset-y-0 right-0 w-64 bg-gray-800 z-50 p-4"> {/* Side menu */}
-            <div className="flex justify-end">
-              <button onClick={toggleMenu} className="text-white focus:outline-none">
-                <XIcon className="w-6 h-6" />
-              </button>
-            </div>
             <ul className="flex flex-col space-y-4 mt-4">
               <li><a href="#header" onClick={toggleMenu} className="text-white hover:text-green-400 transition-colors">Home</a></li>
               <li><a href="#projects" onClick={toggleMenu} className="text-white hover:text-green-400 transition-colors">Projetos</a></li>
