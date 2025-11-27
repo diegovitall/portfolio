@@ -45,7 +45,11 @@ export function Menu() {
       {/* Mobile Menu Modal - only appears when isMenuOpen is true AND it's a mobile screen */}
       {!isDesktop && isMenuOpen && (
         <div>
-          <div className="fixed inset-0 bg-gray-900 bg-opacity-75 z-50" onClick={toggleMenu}></div> {/* Overlay */}
+          <button
+            onClick={toggleMenu}
+            className="fixed inset-0 bg-gray-900 bg-opacity-75 z-50"
+            aria-label="Close menu"
+          ></button>
           <div className="fixed inset-y-0 right-0 w-64 bg-gray-800 z-50 p-4"> {/* Side menu */}
             <ul className="flex flex-col space-y-4 mt-4">
               <li><a href="#header" onClick={toggleMenu} className="text-white hover:text-green-400 transition-colors">Home</a></li>

@@ -132,38 +132,38 @@ export function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="py-32 bg-gray-900">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl lg:text-5xl text-white mb-4">
-            Projetos <span className="text-green-400">Realizados</span>
-          </h2>
-          <p className="text-xl text-gray-400">
-            Conheça alguns dos projetos que desenvolvi para meus clientes
-          </p>
-        </div>
-
-        <div className="max-w-7xl ml-2 mb-8">
-          <div className="bg-gray-900 rounded-lg px-4 py-3 font-mono text-sm border border-gray-800 max-w-2xl">
-            <div className="text-green-400">
-              <span className="text-gray-500">$</span> ls -la projects/
+        <section id="projects" className="py-32 bg-gray-900" aria-label="Projetos">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl lg:text-5xl text-white mb-4">
+                Projetos <span className="text-green-400">Realizados</span>
+              </h2>
+              <p className="text-xl text-gray-400">
+                Conheça alguns dos projetos que desenvolvi para meus clientes
+              </p>
             </div>
-            <div className="text-gray-400 mt-1">
-              Found {projects.length} projects... Arraste para navegar →
+    
+            <div className="max-w-7xl ml-2 mb-8">
+              <div className="bg-gray-900 rounded-lg px-4 py-3 font-mono text-sm border border-gray-800 max-w-2xl">
+                <div className="text-green-400">
+                  <span className="text-gray-500">$</span> ls -la projects/
+                </div>
+                <div className="text-gray-400 mt-1">
+                  Found {projects.length} projects... Arraste para navegar →
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div 
-          ref={carouselRef}
-          className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none"
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseLeave}
-        >
-                    <div
-                      className={`flex transition-transform duration-300 ease-out ${isMobile ? 'gap-0' : 'gap-6'}`}
+    
+            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+            <div
+              ref={carouselRef}
+              className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none"
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div                      className={`flex transition-transform duration-300 ease-out ${isMobile ? 'gap-0' : 'gap-6'}`}
                       style={{
                         transform: `translateX(-${currentIndex * cardTranslateX}%)`,
                       }}
