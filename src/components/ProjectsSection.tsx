@@ -135,6 +135,13 @@ export function ProjectsSection() {
     setScrollLeft(currentIndex);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (intervalRef.current) clearInterval(intervalRef.current); // Pause on interaction
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - (carouselRef.current?.offsetLeft || 0));
+    setScrollLeft(currentIndex);
+  };
+
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging) return;
     e.preventDefault();
@@ -144,12 +151,36 @@ export function ProjectsSection() {
     setCurrentIndex(newIndex);
   };
 
+  const handleTouchMove = useCallback((e: TouchEvent) => {
+    if (!isDragging) return;
+    e.preventDefault(); // Prevent default page scrolling
+    const x = e.touches[0].pageX - (carouselRef.current?.offsetLeft || 0);
+    const walk = (startX - x) / 300; // Ajuste a sensibilidade
+    const newIndex = Math.max(0, Math.min(projects.length - 1, Math.round(scrollLeft + walk)));
+    setCurrentIndex(newIndex);
+  }, [isDragging, startX, scrollLeft, projects.length]);
+
+  useEffect(() => {
+    const carouselElement = carouselRef.current;
+    if (isDragging && carouselElement) {
+      carouselElement.addEventListener('touchmove', handleTouchMove, { passive: false });
+      return () => {
+        carouselElement.removeEventListener('touchmove', handleTouchMove);
+      };
+    }
+  }, [isDragging, handleTouchMove]);
+
   const handleMouseUp = () => {
     setIsDragging(false);
     startAutoPlay(); // Resume on interaction end
   };
 
   const handleMouseLeave = () => {
+    setIsDragging(false);
+    startAutoPlay(); // Resume on interaction end
+  };
+
+  const handleTouchEnd = () => {
     setIsDragging(false);
     startAutoPlay(); // Resume on interaction end
   };
@@ -187,10 +218,13 @@ export function ProjectsSection() {
               ref={carouselRef}
               className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none focus:outline-none"
               tabIndex={0}
+              style={{ touchAction: 'pan-y' }}
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
               onMouseLeave={handleMouseLeave}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
             >
               <div                      className={`flex transition-transform duration-300 ease-out ${isMobile ? 'gap-0' : 'gap-6'}`}
                       style={{
