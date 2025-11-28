@@ -14,4 +14,18 @@ describe('Carousel component', () => {
     expect(getByText('Slide 1')).toBeInTheDocument();
     expect(getByText('Slide 2')).toBeInTheDocument();
   });
+
+  it('applies custom className correctly', () => {
+    const { container } = render(
+      <Carousel className="custom-class">
+        <CarouselContent>
+          <CarouselItem>Slide 1</CarouselItem>
+        </CarouselContent>
+      </Carousel>,
+    );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const carouselWrapper = container.firstChild as HTMLElement;
+    expect(carouselWrapper).toHaveClass('overflow-hidden');
+    expect(carouselWrapper).toHaveClass('custom-class');
+  });
 });

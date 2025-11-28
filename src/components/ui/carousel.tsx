@@ -2,13 +2,14 @@ import * as React from 'react';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
-// import { cn } from './utils';
+import { cn } from './utils';
 
 export interface CarouselProps {
   opts?: Parameters<typeof useEmblaCarousel>[0];
   // plugins not used
   orientation?: 'horizontal' | 'vertical';
   setApi?: (api: UseEmblaCarouselType[1]) => void;
+  className?: string;
 }
 
 export const Carousel: React.FC<React.PropsWithChildren<CarouselProps>> = ({
@@ -16,6 +17,7 @@ export const Carousel: React.FC<React.PropsWithChildren<CarouselProps>> = ({
   opts,
   orientation = 'horizontal',
   setApi,
+  className,
 }) => {
   const [carouselRef, api] = useEmblaCarousel({
     ...opts,
@@ -27,7 +29,11 @@ export const Carousel: React.FC<React.PropsWithChildren<CarouselProps>> = ({
   }, [api, setApi]);
 
   return (
-    <div ref={carouselRef} className="overflow-hidden" role="region">
+    <div
+      ref={carouselRef}
+      className={cn('overflow-hidden', className)}
+      role="region"
+    >
       {children}
     </div>
   );

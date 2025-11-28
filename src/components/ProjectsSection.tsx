@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { ProjectScreen } from './ProjectScreen';
 import portfolioProjectImage from '../assets/portfolio-project.png';
 import card2Image from '../assets/card2-img.png';
@@ -86,19 +86,47 @@ export function ProjectsSection() {
   }, [projects.length, isMobile]); // Recalculate if projects or mobile state change
 
   // Auto-play logic
-  const startAutoPlay = () => {
+  const startAutoPlay = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
     }, 10000);
-  };
+  }, [projects.length]);
 
   useEffect(() => {
     startAutoPlay();
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [projects.length]);
+  }, [startAutoPlay]);
+
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLElement> | KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        setCurrentIndex((prevIndex) =>
+          prevIndex === 0 ? projects.length - 1 : prevIndex - 1,
+        );
+        startAutoPlay(); // Reset autoplay
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+        startAutoPlay(); // Reset autoplay
+      }
+    },
+    [projects.length, startAutoPlay],
+  );
+
+  useEffect(() => {
+    const carouselElement = carouselRef.current;
+    if (carouselElement) {
+      const listener = (e: Event) => handleKeyDown(e as KeyboardEvent);
+      carouselElement.addEventListener('keydown', listener);
+      return () => {
+        carouselElement.removeEventListener('keydown', listener);
+      };
+    }
+  }, [handleKeyDown]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (intervalRef.current) clearInterval(intervalRef.current); // Pause on interaction
@@ -149,7 +177,7 @@ export function ProjectsSection() {
                   <span className="text-gray-500">$</span> ls -la projects/
                 </div>
                 <div className="text-gray-400 mt-1">
-                  Found {projects.length} projects... Arraste para navegar →
+                  Found {projects.length} projects... Use o mouse ou as setas para navegar →
                 </div>
               </div>
             </div>
@@ -157,7 +185,8 @@ export function ProjectsSection() {
             {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
             <div
               ref={carouselRef}
-              className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none"
+              className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none focus:outline-none"
+              tabIndex={0}
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
@@ -189,9 +218,10 @@ export function ProjectsSection() {
             <button
               key={index}
               onClick={() => handleIndicatorClick(index)}
+              onKeyDown={handleKeyDown}
               className={`h-2 rounded-full transition-all ${
-                index === currentIndex 
-                  ? 'w-8 bg-green-500' 
+                index === currentIndex
+                  ? 'w-8 bg-green-500'
                   : 'w-2 bg-gray-600 hover:bg-gray-500'
               }`}
               aria-label={`Ir para projeto ${index + 1}`}
